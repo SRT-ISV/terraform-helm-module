@@ -1,33 +1,33 @@
 variable "gcp_project_id" {
   description = "The GCP project ID."
   type        = string
-  default     = "easysaas-adc-demo"
+  default     = ""
 
 }
 
 variable "region" {
   description = "The GCP region to deploy resources in."
   type        = string
-  default     = "us-central1-a"
+  default     = ""
 }
 
 variable "cluster_name" {
   description = "Name of the cluster"
   type        = string
-  default     = "gke-byoc-c1"
+  default     = ""
 }
 
 variable "chart" {
   description = "Location of helm chart"
   type        = string
-  default     = "nginx"
+  default     = ""
 }
 
 
 variable "helm_repository_link" {
   description = "Helm Repository Link"
   type        = string
-  default     = "https://charts.bitnami.com/bitnami"
+  default     = ""
 }
 
 # variable "helm_namespace" {

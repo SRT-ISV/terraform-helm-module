@@ -1,5 +1,9 @@
 
+locals{
 
+cluster_name = reverse(split("/", var.cluster_id))[0]
+
+}
 data "google_client_config" "default" {}
 
 resource "kubernetes_namespace" "console_app" {
