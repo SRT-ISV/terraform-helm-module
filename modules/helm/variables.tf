@@ -14,6 +14,11 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "helm_namespace" {
+  description = "GKE name space"
+  type        = string
+}
+
 variable "chart" {
   description = "Location of helm chart"
   type        = string
@@ -31,12 +36,18 @@ variable "helm_repository_link" {
 #   default     = ""
 # }
 
-variable "set_value_sa_create" {
-  description = "Helm Repository Link"
-  type        = string
-}
+# variable "set_value_sa_create" {
+#   description = "Helm Repository Link"
+#   type        = string
+# }
 
-variable "set_value_sa_name" {
-  description = "Helm SA name"
+# variable "set_value_sa_name" {
+#   description = "Helm SA name"
+#   type        = string
+# }
+
+
+variable "set_inputs" {
+  description = "List of set inputs (e.g. name1:val1,name2:value2)"
   type        = string
 }
