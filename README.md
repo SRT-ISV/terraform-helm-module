@@ -1,4 +1,3 @@
-```markdown
 # GKE OCI Helm Deployment Module
 
 This Terraform module facilitates the secure, automated deployment of Helm charts hosted as OCI images inside Google Artifact Registry to a Google Kubernetes Engine (GKE) cluster. It operates natively with Application Default Credentials (ADC), bypassing the need for third-party command-line utilities or local shell provisioners.
