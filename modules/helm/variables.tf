@@ -4,7 +4,39 @@ variable "gcp_project_id" {
 
 }
 
+variable "helm_release_name" {
+  description = "helm release name."
+  type        = string
+  
+}
+
+variable "artifact_registry_repo_name" {
+  description = "OCI Image Name."
+  type        = string
+  default     = "oci-images"
+
+}
+
+variable "repo_username" {
+  description = "repository user name"
+  type        = string
+  default     = ""
+
+}
+
+variable "repo_password" {
+  description = "repository user password"
+  type        = string
+  default     = ""
+
+}
+
 variable "region" {
+  description = "The GCP region to deploy resources in."
+  type        = string
+}
+
+variable "zone" {
   description = "The GCP region to deploy resources in."
   type        = string
 }
@@ -23,29 +55,6 @@ variable "chart" {
   description = "Location of helm chart"
   type        = string
 }
-
-
-variable "helm_repository_link" {
-  description = "Helm Repository Link"
-  type        = string
-}
-
-# variable "helm_namespace" {
-#   description = "Helm Repository Link"
-#   type        = string
-#   default     = ""
-# }
-
-# variable "set_value_sa_create" {
-#   description = "Helm Repository Link"
-#   type        = string
-# }
-
-# variable "set_value_sa_name" {
-#   description = "Helm SA name"
-#   type        = string
-# }
-
 
 variable "set_inputs" {
   description = "List of set inputs (e.g. name1:val1,name2:value2)"

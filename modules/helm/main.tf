@@ -2,15 +2,10 @@
 locals{
 
 cluster_name = reverse(split("/", var.cluster_id))[0]
-
-# 1. Your input string
-  raw_input = var.set_inputs #"serviceAccount.create:false,serviceAccount.name:default,configuration.provider:gcp"
-
-  # 2. Convert to a list of objects
+raw_input = var.set_inputs
+# 2. Convert to a list of objects
   helm_sets = [
     for pair in split(",", local.raw_input) : {
-      # Split each pair by ":" and take the first part as name, second as value
-      # trimspace ensures that " key : value " works just as well as "key:value"
       name  = trimspace(split(":", pair)[0])
       value = trimspace(split(":", pair)[1])
     }
@@ -19,17 +14,19 @@ cluster_name = reverse(split("/", var.cluster_id))[0]
 }
 data "google_client_config" "default" {}
 
-resource "kubernetes_namespace" "console_app" {
+resource "kubernetes_namespace_v1" "namespace" {
   metadata {
-    name = var.helm_namespace #"console-app"
+    name = var.helm_namespace
   }
 }
 
 resource "helm_release" "main" {
-  name = "cong"
-  repository = var.helm_repository_link
-  chart = var.chart
-  namespace =  kubernetes_namespace.console_app.metadata[0].name #var.helm_namespace
+  name = var.helm_release_name 
+  repository = "oci://${var.region}-docker.pkg.dev/${var.gcp_project_id}/${var.artifact_registry_repo_name}" 
+  repository_username = "oauth2accesstoken"
+  repository_password = data.google_client_config.default.access_token
+  chart = var.chart 
+  namespace =  kubernetes_namespace_v1.namespace.metadata[0].name
   timeout   = 600
   replace   = true
 

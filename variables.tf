@@ -1,19 +1,37 @@
 variable "gcp_project_id" {
   description = "The GCP project ID."
   type        = string
+  #default     = ""
 
 }
+
+variable "helm_release_name" {
+  description = "helm release name."
+  type        = string
+  default     = "velero-demo"
+  
+}
+
+variable "artifact_registry_repo_name" {
+  description = "The GCP project ID."
+  type        = string
+  default     = "oci-images"
+
+}
+
+
 
 variable "region" {
   description = "The GCP region to deploy resources in."
   type        = string
+  default     = "us-central1"
 }
 
-# variable "cluster_name" {
-#   description = "Name of the cluster"
-#   type        = string
-#   default     = ""
-# }
+variable "zone" {
+  description = "The GCP region to deploy resources in."
+  type        = string
+  default     = "us-central1-a"
+}
 
 variable "cluster_id" {
   description = "ID of the cluster"
@@ -24,6 +42,7 @@ variable "cluster_id" {
 variable "helm_namespace" {
   description = "GKE name space"
   type        = string
+  default     = "velero"
 }
 
 variable "chart" {
@@ -33,29 +52,6 @@ variable "chart" {
 }
 
 
-variable "helm_repository_link" {
-  description = "Helm Repository Link"
-  type        = string
-  default     = "https://vmware-tanzu.github.io/helm-charts"
-}
-
-# variable "helm_namespace" {
-#   description = "Helm Repository Link"
-#   type        = string
-#   default     = ""
-# }
-
-# variable "set_value_sa_create" {
-#   description = "Helm Repository Link"
-#   type        = string
-#   default     = "false"
-# }
-
-# variable "set_value_sa_name" {
-#   description = "Helm SA name"
-#   type        = string
-#   default     = "default"
-# }
 
 variable "set_inputs" {
   description = "List of set inputs (e.g. name1:val1,name2:value2)"

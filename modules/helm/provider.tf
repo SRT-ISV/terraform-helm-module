@@ -1,6 +1,6 @@
 data "google_container_cluster" "primary" {
   name     = local.cluster_name #var.cluster_name
-  location = var.region
+  location = var.zone
   project  = var.gcp_project_id
 }
 
