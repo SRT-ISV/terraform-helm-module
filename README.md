@@ -27,7 +27,7 @@ The unique project identifier within Google Cloud. This project must host both t
 
 ### `cluster_id` (Required)
 The source cluster address used by the provider to extract connection configurations, API endpoints, and cluster certificates.
-* **Example Format:** `projects/easysaas-adc-demo/locations/us-central1-a/clusters/gke-byoc-c1`
+* **Example Format:** `projects/my-project/locations/us-central1-a/clusters/my-cluster1`
 
 ### `set_inputs` (Required)
 A single string parsing interface used to inject configurations into your Helm chart template dynamically. Ensure there are no stray spaces around the separating colons (`:`).
