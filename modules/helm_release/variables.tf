@@ -17,6 +17,12 @@ variable "artifact_registry_repo_name" {
 
 }
 
+variable "repository_link" {
+  type        = string
+  description = "Custom OCI or HTTP repository link. Leaves empty to default to Google Artifact Registry."
+  default     = null
+}
+
 variable "repo_username" {
   description = "repository user name"
   type        = string
@@ -31,14 +37,16 @@ variable "repo_password" {
 
 }
 
-variable "region" {
+variable "gcp_region" {
   description = "The GCP region to deploy resources in."
   type        = string
+  default     = "us-central1"
 }
 
-variable "zone" {
-  description = "The GCP region to deploy resources in."
+variable "gcp_zone" {
+  description = "The GCP zone to deploy resources in."
   type        = string
+  default     = "us-central1-a"
 }
 
 variable "cluster_id" {

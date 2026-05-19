@@ -10,7 +10,6 @@ raw_input = var.set_inputs
       value = trimspace(split(":", pair)[1])
     }
   ]
-
 }
 data "google_client_config" "default" {}
 
@@ -22,7 +21,7 @@ resource "kubernetes_namespace_v1" "namespace" {
 
 resource "helm_release" "main" {
   name = var.helm_release_name 
-  repository = "oci://${var.region}-docker.pkg.dev/${var.gcp_project_id}/${var.artifact_registry_repo_name}" 
+  repository = var.repository_link != null && var.repository_link != "" ? var.repository_link : "oci://${var.gcp_region}-docker.pkg.dev/${var.gcp_project_id}/${var.artifact_registry_repo_name}"
   repository_username = "oauth2accesstoken"
   repository_password = data.google_client_config.default.access_token
   chart = var.chart 
