@@ -11,10 +11,11 @@ The table below describes all input variables required or supported by this modu
 | `gcp_project_id` | `string` | The target Google Cloud Platform (GCP) Project ID. | *None* | **Yes** |
 | `cluster_id` | `string` | The fully qualified or shorthand resource ID of the target GKE cluster. | *None* | **Yes** |
 | `set_inputs` | `string` | Comma-separated list of key-value overrides passed to the Helm execution engine (Format: `key1:val1,key2:val2`). | *None* | **Yes** |
+| `repository_link` | `string` | Custom OCI or HTTP repository link override. If provided, overrides the automatic Artifact Registry path generation. | `null` | No |
 | `helm_release_name` | `string` | The unique release name for the Helm deployment inside the cluster namespace. | `"velero-demo"` | No |
 | `artifact_registry_repo_name` | `string` | The name of the Google Artifact Registry repository hosting the OCI Helm charts. | `"oci-images"` | No |
-| `region` | `string` | The regional location of the Google Artifact Registry repository. | `"us-central1"` | **Yes** |
-| `zone` | `string` | The specific GCP availability zone where the GKE cluster resides. | `"us-central1-a"` | **Yes** |
+| `region` | `string` | The regional location of the Google Artifact Registry repository. | `"us-central1"` | No |
+| `zone` | `string` | The specific GCP availability zone where the GKE cluster resides. | `"us-central1-a"` | No |
 | `helm_namespace` | `string` | The target Kubernetes namespace inside GKE where resources will be installed. | `"velero"` | No |
 | `chart` | `string` | The exact name of the OCI chart artifact inside the registry. | `"velero"` | No |
 
@@ -33,6 +34,9 @@ The source cluster address used by the provider to extract connection configurat
 A single string parsing interface used to inject configurations into your Helm chart template dynamically. Ensure there are no stray spaces around the separating colons (`:`).
 * **Example Syntax:** `"serviceAccount.create:false,serviceAccount.name:default,configuration.provider:gcp"`
 
+### `repository_link` (Optional)
+Allows you to bypass the standard automated Google Artifact Registry URL construction logic entirely. When you supply a valid repository path to this variable, Terraform skips building the default Google Cloud registry path and directly connects to the specified external endpoint instead.
+
 ---
 
 ## Prerequisites: Creating and Pushing the OCI Chart Image
@@ -42,7 +46,7 @@ Before running the Terraform code, your Helm chart must be packaged and hosted i
 ### 1. Create an Artifact Registry Repository
 Create a Docker/OCI-compatible repository inside your Google Cloud project via the gcloud CLI or GCP Console:
 ```bash
-gcloud artifacts repositories create <ARTIFACT_REGISTRY_REPO_NAME> \
-    --repository-format=docker \
-    --location=<REGION> \
+gcloud artifacts repositories create <ARTIFACT_REGISTRY_REPO_NAME> \\
+    --repository-format=docker \\
+    --location=<REGION> \\
     --description="OCI Helm Charts Repository"
