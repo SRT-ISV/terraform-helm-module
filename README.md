@@ -13,8 +13,8 @@ The table below describes all input variables required or supported by this modu
 | `set_inputs` | `string` | Comma-separated list of key-value overrides passed to the Helm execution engine (Format: `key1:val1,key2:val2`). | *None* | **Yes** |
 | `helm_release_name` | `string` | The unique release name for the Helm deployment inside the cluster namespace. | `"velero-demo"` | No |
 | `artifact_registry_repo_name` | `string` | The name of the Google Artifact Registry repository hosting the OCI Helm charts. | `"oci-images"` | No |
-| `region` | `string` | The regional location of the Google Artifact Registry repository. | `"us-central1"` | No |
-| `zone` | `string` | The specific GCP availability zone where the GKE cluster resides. | `"us-central1-a"` | No |
+| `region` | `string` | The regional location of the Google Artifact Registry repository. | `"us-central1"` | **Yes** |
+| `zone` | `string` | The specific GCP availability zone where the GKE cluster resides. | `"us-central1-a"` | **Yes** |
 | `helm_namespace` | `string` | The target Kubernetes namespace inside GKE where resources will be installed. | `"velero"` | No |
 | `chart` | `string` | The exact name of the OCI chart artifact inside the registry. | `"velero"` | No |
 
