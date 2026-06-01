@@ -1,20 +1,24 @@
+# 1. CORRECTED DATA SOURCE: Use "id" instead of "name"
 data "google_container_cluster" "primary" {
-  name     = local.cluster_name #var.cluster_name
+  name     = var.cluster_id
   location = var.gcp_zone
   project  = var.gcp_project_id
 }
 
-
+# 2. KUBERNETES PROVIDER CONFIGURATION
 provider "kubernetes" {
-  host                   = "https://${data.google_container_cluster.primary.endpoint}"
-  token                  = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(data.google_container_cluster.primary.master_auth[0].cluster_ca_certificate)
+  host                   = "https://${data.google_container_cluster.primary.control_plane_endpoints_config[0].dns_endpoint_config[0].endpoint}"
+  token                  = data.google_client_config.default.access_token 
+  insecure = true
+  # cluster_ca_certificate = base64decode(data.google_container_cluster.primary.master_auth[0].cluster_ca_certificate)
 }
 
+# 3. HELM PROVIDER CONFIGURATION
 provider "helm" {
   kubernetes = {
-    host                   = data.google_container_cluster.primary.endpoint
-    cluster_ca_certificate = base64decode(data.google_container_cluster.primary.master_auth[0].cluster_ca_certificate)
+    host                   = "https://${data.google_container_cluster.primary.control_plane_endpoints_config[0].dns_endpoint_config[0].endpoint}"
     token                  = data.google_client_config.default.access_token
+    insecure = true
+    #   cluster_ca_certificate = base64decode(data.google_container_cluster.primary.master_auth[0].cluster_ca_certificate)
   }
 }
