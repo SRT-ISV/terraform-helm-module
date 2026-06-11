@@ -14,7 +14,7 @@ The table below describes all input variables required or supported by this modu
 | `set_inputs` | `string` | Comma-separated list of key-value overrides passed to the Helm execution engine (Format: `key1:val1,key2:val2`). | *None* | **Yes** |
 | `cluster_ca_certificate` | `string` | The raw, un-decoded base64 cluster CA certificate string. | `""` | No |
 | `insecure_connection` | `bool` | Whether to bypass strict server TLS verification (crucial for Bastion/Private VPC runners). | `false` | No |
-| `repository_link` | `string` | **[Public Chart Routing]** Custom OCI or HTTP repository link override. If any value is passed here, it automatically takes priority over `artifact_registry_repo_name` and directs the deployment to a public repo. Leave empty/null to deploy a private chart. | `null` | No |
+| `repository_link` | `string` | **[Public Chart Routing]** Pass the HTTP repository link override. If any value is passed here, it automatically takes priority over `artifact_registry_repo_name` and directs the deployment to a public repo. Leave empty/null to deploy a private chart. | `null` | No |
 | `artifact_registry_repo_name` | `string` | **[Private Chart Routing]** The name of the Google Artifact Registry repository hosting your private OCI Helm charts. To use this, you must have an OCI image pushed inside the registry and leave `repository_link` completely empty. | `"oci-images"` | No |
 | `gcp_region` | `string` | The regional location of the Google Artifact Registry repository and GKE cluster. | `"us-central1"` | No |
 | `gcp_zone` | `string` | The specific GCP availability zone where the GKE cluster resides. | `"us-central1"` | No |
