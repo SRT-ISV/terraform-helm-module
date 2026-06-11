@@ -55,19 +55,19 @@ gcloud artifacts repositories create <ARTIFACT_REGISTRY_REPO_NAME> \
     --repository-format=docker \
     --location=<REGION> \
     --description="OCI Helm Charts Repository"
-
+```
 ### Step-2 (Authenticate in Artifact Registry)
 Create a Docker/OCI-compatible repository inside your Google Cloud project via the gcloud CLI:
-
+```bash
 gcloud auth print-access-token | helm registry login -u oauth2accesstoken --password-stdin <REGION>-docker.pkg.dev
-
+```
 ### Step-3 (Create Helm Package)
 Navigate to your local chart directory containing your Chart.yaml file and compress it into a standard .tgz archive target:
-
+```bash
 helm package .
-
+```
 ### Step-4 (Push Helm OCI Image into Artifact Registry)
 Upload your freshly generated chart archive tarball straight up to your private repository endpoint path:
-
+```bash
 helm push velero-*.tgz oci://<REGION>-docker.pkg.dev/<PROJECT_ID>/<ARTIFACT_REGISTRY_REPO_NAME>
 ```
