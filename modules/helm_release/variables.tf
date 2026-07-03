@@ -43,10 +43,10 @@ variable "gcp_region" {
   default     = "us-central1"
 }
 
-variable "gcp_zone" {
+variable "gcp_location" {
   description = "The GCP zone to deploy resources in."
   type        = string
-  default     = "us-central1-a"
+  default     = "us-central1"
 }
 
 variable "cluster_id" {
